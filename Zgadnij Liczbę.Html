@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zgadnij liczbę</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        input { width: 200px; height: 40px; font-size: 24px; text-align: center; margin: 10px; }
+        button { padding: 10px 20px; font-size: 24px; cursor: pointer; margin: 10px; }
+        #komunikat { font-size: 28px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Zgadnij liczbę</h1>
+    <p style="font-size: 100px;">Wpisz liczbę od 1 do 100:</p>
+    <input type="number" id="liczba" min="1" max="100" placeholder="Twoja liczba">
+    <button onclick="sprawdz()">Sprawdź</button>
+    <div id="komunikat"></div>
+
+    <script>
+        const losowaLiczba = Math.floor(Math.random() * 100) + 1;
+        let proby = 0;
+
+        document.getElementById('liczba').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                sprawdz();
+            }
+        });
+
+        function sprawdz() {
+            const liczba = parseInt(document.getElementById('liczba').value);
+            proby++;
+
+            if (liczba === losowaLiczba) {
+                document.getElementById('komunikat').innerText = `Gratulacje! Zgadłeś po ${proby} próbach!`;
+            } else if (liczba < losowaLiczba) {
+                document.getElementById('komunikat').innerText = 'Za mała liczba!';
+            } else {
+                document.getElementById('komunikat').innerText = 'Za duża liczba!';
+            }
+        }
+    </script>
+</body>
+</html>
